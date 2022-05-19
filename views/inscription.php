@@ -22,7 +22,7 @@ session_start();
     <header>
         <nav>
             <ul class="navigation">
-                <li><a href="./index.php">Memory</a></li>
+                <li><a href="./index.php">Autocompletion</a></li>
                 <li><a href="./connexion.php">Connexion</a></li>
             </ul>
         </nav>
@@ -35,17 +35,17 @@ session_start();
 
             <p class="erreur"></p>
 
-            <form action="../Controllers/InscriptionController.php" method="post" id="inscription">
+            <form action="" method="post" id="inscription">
 
-                <input class="prenom" type="text" name="prenom" placeholder="Prenom" autocomplete="off">
+                <input class="prenom" type="text" name="ins_prenom" placeholder="Prenom" autocomplete="off">
 
-                <input class="nom" type="text" name="nom" placeholder="Nom" autocomplete="off">
+                <input class="nom" type="text" name="ins_nom" placeholder="Nom" autocomplete="off">
 
-                <input class="email" type="text" name="email" placeholder="Email" autocomplete="off">
+                <input class="email" type="text" name="ins_email" placeholder="Email" autocomplete="off">
 
-                <input class="password" type="password" name="password" placeholder="Votre mot de passe" autocomplete="off">
+                <input class="password" type="password" name="ins_password" placeholder="Votre mot de passe" autocomplete="off">
 
-                <input type="password" name="confirm" placeholder="Votre mot de passe" autocomplete="off">
+                <input type="password" name="ins_confirm" placeholder="Votre mot de passe" autocomplete="off">
 
 
                 <button id="validation" type="submit" name="submit">Valider</button>

@@ -28,9 +28,9 @@ if (!isset($_SESSION['user'])) {
     <header>
         <nav>
             <ul class="navigation">
-                <li><a href="./index.php">Index</a></li>
+                <li><a href="./index.php">Autocompletion</a></li>
                 <li>
-                    <a href="./deconnexion.php">Deconnexion</a>
+                    <a href="deconnexion.php">Deconnexion</a>
                 </li>
 
             </ul>
@@ -38,6 +38,7 @@ if (!isset($_SESSION['user'])) {
     </header>
     <main>
         <p> Auto complétion </p>
+        <?php var_dump($_SESSION['user']); ?>
 
         <label for="site-search">Search the site:</label>
         <input type="search" id="site-search" name="q">

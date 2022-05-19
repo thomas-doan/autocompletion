@@ -82,10 +82,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     if (validation) {
-        validation.addEventListener("click", function() {
+        validation.addEventListener("click", function(e) {
             let formData = new FormData(formInscription);
 
-            fetch("../Controllers/InscriptionController.php", {
+            fetch("../Controllers/routerApi.php", {
                     method: "POST",
                     body: formData,
                 })
@@ -105,10 +105,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     if (valid_connexion) {
-        valid_connexion.addEventListener("click", function() {
+        valid_connexion.addEventListener("click", function(e) {
+            e.preventDefault();
             let formData = new FormData(formConnexion);
 
-            fetch("../Controllers/ConnexionController.php", {
+            fetch("../Controllers/routerApi.php", {
                     method: "POST",
                     body: formData,
                 })

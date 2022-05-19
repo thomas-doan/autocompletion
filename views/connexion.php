@@ -31,7 +31,7 @@ if (isset($_SESSION['user'])) {
     <header>
         <nav>
             <ul class="navigation">
-                <li><a href="./index.php">Index</a></li>
+                <li><a href="./index.php">Autocompletion</a></li>
                 <li><a href="./inscription.php">Inscription</a></li>
             </ul>
         </nav>
@@ -43,7 +43,7 @@ if (isset($_SESSION['user'])) {
 
             <p class="erreur"></p>
 
-            <form action="../Controllers/ConnexionController.php" method="post" id="connexion_form">
+            <form action="" method="post" id="connexion_form">
 
                 <input class="email" type="text" name="email" placeholder="Email" autocomplete="off">
 
