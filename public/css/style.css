@@ -17,6 +17,17 @@ nav {
     background-color: antiquewhite;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-size: 2rem;
+}
+
+main {
+    flex-grow: 1;
+}
+
 .navigation {
     width: 100%;
     display: flex;
@@ -24,15 +35,24 @@ nav {
     justify-content: space-around;
     background-color: rgb(254, 254, 252);
     list-style-type: none;
+    border-bottom: 1px solid;
 }
 
 .navigation a {
     color: black;
-    font-size: 2rem;
     text-decoration: none;
 }
 
 .navigation li {
     padding: 1rem;
     margin: 1rem;
+}
+
+.navigation a:hover {
+    color: rgb(95, 91, 91);
+}
+
+footer {
+    height: 5vh;
+    background-color: yellow;
 }

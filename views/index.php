@@ -37,12 +37,20 @@ if (!isset($_SESSION['user'])) {
         </nav>
     </header>
     <main>
-        <p> bonjour c'est l'index</p>
+        <p> Auto complétion </p>
 
+        <label for="site-search">Search the site:</label>
+        <input type="search" id="site-search" name="q">
+
+        <button>Search</button>
+        <ul class="firstResult"></ul>
+        <ul class="secondResult"></ul>
 
     </main>
 
-
+    <footer>
+        <p> footer </p>
+    </footer>
 
 </body>
 

@@ -1,6 +1,6 @@
 <?php
 
-//constante d'envoronnement
+//constante d'environnement
 define("DBHOST", "localhost");
 define("DBUSER", "root");
 define("DBPASS", "");

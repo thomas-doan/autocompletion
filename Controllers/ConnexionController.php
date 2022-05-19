@@ -17,6 +17,9 @@ if (!empty($_POST) && isset($_POST['email'], $_POST['password']) && !empty($_POS
             $password = password_hash($password, PASSWORD_BCRYPT);
             $insert = $utilisateur->connect($email, $exist[0]['password']);
 
+
+
+
             $_SESSION['user'] = [];
             $_SESSION['user']['email'] = $exist[0]['email'];
             $_SESSION['user']['id'] = $exist[0]['id'];
@@ -26,6 +29,8 @@ if (!empty($_POST) && isset($_POST['email'], $_POST['password']) && !empty($_POS
             $gestion_erreur = [
                 "valide" =>  array(
                     0 => '1',
+
+
                 )
             ];
 
