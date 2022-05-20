@@ -19,7 +19,9 @@ if (
 ) {
     $inscription = new inscriptionController();
     $inscription->inscription();
+} else {
 }
+
 
 if (!empty($_POST['ins_nom']) && !empty($_POST['ins_prenom']) && !empty($_POST['ins_email']) && !empty($_POST['ins_password'])) {
 
@@ -32,7 +34,17 @@ if (!empty($_POST['ins_nom']) && !empty($_POST['ins_prenom']) && !empty($_POST['
     echo json_encode($gestion_erreur);
 }
 
-if (isset($_POST['search'])) {
+/* if (isset($_POST['search'])) {
     $search = new indexController();
     $search->methodSearch($_POST['search']);
+} */
+
+if (isset($_GET['action'])) {
+
+    switch ($_GET['action']) {
+
+        case 'search':
+            $search = new indexController();
+            $search->methodSearch($_POST['search']);
+    }
 }

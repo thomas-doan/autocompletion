@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if ((data.length = 1)) {
             let formData = new FormData(form);
 
-            fetch("../Controllers/routerApi.php", {
+            fetch("../Controllers/routerApi.php?action=search", {
                     method: "POST",
                     body: formData,
                 })
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
         //en cours
         /*     if (result.length > 1) {
-                                                                  fetch("../Controllers/routerApi.php", {
-                                                                    method: "POST",
-                                                                    body: formData,
-                                                                  });
-                                                                } */
+                                                                                                              fetch("../Controllers/routerApi.php", {
+                                                                                                                method: "POST",
+                                                                                                                body: formData,
+                                                                                                              });
+                                                                                                            } */
     }
 
     console.log(validation);
@@ -54,9 +54,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // autocompletion
 
     if (resultSearch) {
-        resultSearch.addEventListener("keyup", function(e) {
+        resultSearch.addEventListener("input", (e) => {
             e.preventDefault();
-            searchMethod(this.value);
+            console.log(e);
+            searchMethod(e.target.value);
         });
     }
 
