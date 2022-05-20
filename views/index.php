@@ -38,12 +38,15 @@ if (!isset($_SESSION['user'])) {
     </header>
     <main>
         <p> Auto complétion </p>
-        <?php var_dump($_SESSION['user']); ?>
 
-        <label for="site-search">Search the site:</label>
-        <input type="search" id="site-search" name="q">
+        <form action="" method="post" id="search_form">
+            <label for="site-search">Search the site:</label>
 
-        <button>Search</button>
+            <input type="search" id="site-search" name="search">
+
+            <button>Search</button>
+        </form>
+
         <ul class="firstResult"></ul>
         <ul class="secondResult"></ul>
 

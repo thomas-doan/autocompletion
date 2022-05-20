@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     // INSCRIPTION////////////////////////////////
     let p_erreur = document.querySelector(".erreur");
-    let formInscription = document.forms["inscription"];
+    let formInscription = document.querySelector["inscription"];
     let validation = document.getElementById("validation");
-    let formConnexion = document.forms["connexion_form"];
+    let formConnexion = document.querySelector["connexion_form"];
     let valid_connexion = document.getElementById("valid_connexion");
 
     // controle regex
@@ -17,7 +17,50 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let email = document.querySelector(".email");
     let password = document.querySelector(".password");
 
+    // Recherche
+    let resultSearch = document.querySelector("#site-search");
+    let form = document.querySelector("#search_form");
+
+    // fonction
+    // Traitement de la recherche autocompletion
+
+    function searchMethod(data) {
+        if ((data.length = 1)) {
+            let formData = new FormData(form);
+
+            fetch("../Controllers/routerApi.php", {
+                    method: "POST",
+                    body: formData,
+                })
+                .then((response) => response.json())
+
+            .then((response) => {
+                console.log(response);
+
+                //afficher le résultat dans li ul search
+            });
+        }
+        //en cours
+        /*     if (result.length > 1) {
+                                                                  fetch("../Controllers/routerApi.php", {
+                                                                    method: "POST",
+                                                                    body: formData,
+                                                                  });
+                                                                } */
+    }
+
     console.log(validation);
+
+    // autocompletion
+
+    if (resultSearch) {
+        resultSearch.addEventListener("keyup", function(e) {
+            e.preventDefault();
+            searchMethod(this.value);
+        });
+    }
+
+    // controle nom
 
     if (nom) {
         nom.addEventListener("keyup", function() {
@@ -81,6 +124,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    // Inscription
+
     if (validation) {
         validation.addEventListener("click", function(e) {
             let formData = new FormData(formInscription);
@@ -103,6 +148,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 });
         });
     }
+
+    // connexion
 
     if (valid_connexion) {
         valid_connexion.addEventListener("click", function(e) {

@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+
+require_once 'connectDb.php';
 require_once 'ConnexionController.php';
 require_once 'IndexController.php';
 require_once 'InscriptionController.php';
@@ -28,4 +30,9 @@ if (!empty($_POST['ins_nom']) && !empty($_POST['ins_prenom']) && !empty($_POST['
     ];
 
     echo json_encode($gestion_erreur);
+}
+
+if (isset($_POST['search'])) {
+    $search = new indexController();
+    $search->methodSearch($_POST['search']);
 }

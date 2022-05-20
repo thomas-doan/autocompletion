@@ -3,6 +3,7 @@
 require_once '../Model/UserModel.php';
 
 
+
 class inscriptionController
 {
 

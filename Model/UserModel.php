@@ -1,10 +1,5 @@
 <?php
 
-//constante d'environnement
-define("DBHOST", "localhost");
-define("DBUSER", "root");
-define("DBPASS", "");
-define("DBNAME", "autocompletion");
 
 
 class UserModel
@@ -20,18 +15,6 @@ class UserModel
     //le constructeur
     public function __construct()
     {
-        $dsn = "mysql:dbname=" . DBNAME . ";host=" . DBHOST;
-
-        try {
-            $this->bdd = new PDO($dsn, DBUSER, DBPASS);
-
-            $this->bdd->exec("SET NAMES utf8");
-
-            $this->bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,  PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            die("Erreur de connexion a la base: " . $e->getMessage());
-        }
-        return $this->bdd;
     }
 
 
@@ -40,7 +23,7 @@ class UserModel
     {
         $sqlVerif = "SELECT * FROM utilisateurs WHERE email =:email";
 
-        $requete = $this->bdd->prepare($sqlVerif);
+        $requete = Database::connect_db()->prepare($sqlVerif);
 
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
 
@@ -58,7 +41,7 @@ class UserModel
 
         $sql1 = "INSERT INTO `utilisateurs`(`nom`, `prenom`, `email`, `password`) VALUES ( :nom,:prenom , :email, :password)";
 
-        $requete1 = $this->bdd->prepare($sql1);
+        $requete1 = Database::connect_db()->prepare($sql1);
 
         $requete1->bindValue(":nom", $nom, PDO::PARAM_STR);
         $requete1->bindValue(":prenom", $prenom, PDO::PARAM_STR);
@@ -75,7 +58,7 @@ class UserModel
 
         $sql = "SELECT * FROM `utilisateurs` WHERE email = :email AND password = :password";
 
-        $requete = $this->bdd->prepare($sql);
+        $requete = Database::connect_db()->prepare($sql);
 
 
         $requete->bindValue(":email", $email, PDO::PARAM_STR);
