@@ -26,6 +26,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let firstViewResult = document.querySelector(".firstResult");
     let secondViewResult = document.querySelector(".secondResult");
 
+    // li de la recherche
+
     // fonction
     // Traitement de la recherche autocompletion
 
@@ -34,19 +36,30 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // traitement du résultat recherche
 
     function resultInputSearch(data, fetchArrayData) {
-        console.log(data);
-        console.log(fetchArrayData);
+        /*     console.log(data);
+                                                        console.log(fetchArrayData); */
 
         dataMask = new RegExp(`^${data}`, "g");
 
         /*   console.log(fetchArrayData[1].nom.match(dataMask)); */
-
+        let resultPushArray = [];
         for (i = 0; i < fetchArrayData.length; i++) {
             if (fetchArrayData[i].nom.match(dataMask) != null) {
-                console.log("test ok");
-                console.log(fetchArrayData[i]);
+                /*          console.log("test ok"); */
+                /*   console.log(fetchArrayData[i]); */
+                /*                 firstViewResult.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${fetchArrayData[i].id_pokemon}"> ${fetchArrayData[i].nom} </a></li>`;
+                 */
+
+                resultPushArray.push(fetchArrayData[i]);
             }
         }
+
+        for (i = 0; i < resultPushArray.length; i++) {
+            if (resultPushArray[i].nom.match(dataMask) != null) {
+                firstViewResult.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${resultPushArray[i].id_pokemon}"> ${resultPushArray[i].nom} </a></li>`;
+            }
+        }
+        console.log(resultPushArray);
     }
 
     // fonction qui va créer le resultat de l'auto en deux listes
@@ -55,7 +68,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     function searchMethod(data) {
-        if ((data.length = 1)) {
+        if (data.length > 0) {
             let formData = new FormData(form);
 
             fetch("../Controllers/routerApi.php?action=search", {
@@ -70,6 +83,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 //afficher le résultat dans li ul search
             });
+        }
+        if (data === "") {
+            var lis = document.querySelectorAll(".firstResult li");
+            for (var i = 0;
+                (li = lis[i]); i++) {
+                li.parentNode.removeChild(li);
+            }
         }
     }
 

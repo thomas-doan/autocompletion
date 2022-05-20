@@ -48,7 +48,9 @@ if (!isset($_SESSION['user'])) {
         </form>
 
         <ul class="firstResult"></ul>
+
         <ul class="secondResult"></ul>
+
 
     </main>
 
