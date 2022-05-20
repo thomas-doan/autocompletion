@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let regexChiffre = /[0-9]+/;
     let regexUpperCase = /[A-Z]+/;
     let regexMail = /.+\@.+\..+/;
+
     // variable initialisé
     let nom = document.querySelector(".nom");
     let prenom = document.querySelector(".prenom");
@@ -35,36 +36,72 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // traitement du résultat recherche
 
-    function resultInputSearch(data, fetchArrayData) {
-        /*     console.log(data);
-                                                                        console.log(fetchArrayData); */
+    function deleteUlList(data) {
+        var ChildNodeDelete = document.querySelectorAll(data);
+        for (var i = 0;
+            (li = ChildNodeDelete[i]); i++) {
+            li.parentNode.removeChild(li);
+        }
+    }
 
+    // creer les listes dans le html
+
+    function createUl(
+        classOfUlFirst,
+        classOfUlSecond,
+        regx,
+        infoArrayFirst,
+        infoArraySecond
+    ) {
+        console.log("test enter");
+        for (i = 0; i < infoArrayFirst.length; i++) {
+            if (infoArrayFirst[i].nom.match(regx) != null) {
+                classOfUlFirst.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${infoArrayFirst[i].id_pokemon}"> ${infoArrayFirst[i].nom} </a></li>`;
+            }
+        }
+        for (i = 0; i < infoArraySecond.length; i++) {
+            if (infoArraySecond[i].nom.match(regx) == null) {
+                classOfUlSecond.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${infoArraySecond[i].id_pokemon}"> ${infoArraySecond[i].nom} </a></li>`;
+            }
+        }
+    }
+
+    function resultInputSearch(data, fetchArrayData) {
         dataMask = new RegExp(`^${data}`, "g");
 
         /*   console.log(fetchArrayData[1].nom.match(dataMask)); */
-        let resultPushArray = [];
+        let resultPushArrayFirstLi = [];
+        let resultPushArraySecondLi = [];
+
         for (i = 0; i < fetchArrayData.length; i++) {
             if (fetchArrayData[i].nom.match(dataMask) != null) {
-                /*          console.log("test ok"); */
-                /*   console.log(fetchArrayData[i]); */
-                /*                 firstViewResult.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${fetchArrayData[i].id_pokemon}"> ${fetchArrayData[i].nom} </a></li>`;
-                 */
-
-                resultPushArray.push(fetchArrayData[i]);
+                resultPushArrayFirstLi.push(fetchArrayData[i]);
+            } else {
+                resultPushArraySecondLi.push(fetchArrayData[i]);
             }
         }
-        var lis = document.querySelectorAll(".firstResult li");
-        for (var i = 0;
-            (li = lis[i]); i++) {
-            li.parentNode.removeChild(li);
-        }
 
-        for (i = 0; i < resultPushArray.length; i++) {
-            if (resultPushArray[i].nom.match(dataMask) != null) {
-                firstViewResult.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${resultPushArray[i].id_pokemon}"> ${resultPushArray[i].nom} </a></li>`;
-            }
-        }
-        console.log(resultPushArray);
+        let nameOfLiToDelete = ".firstResult li";
+        deleteUlList(nameOfLiToDelete);
+
+        /*    createUl(firstViewResult, dataMask, resultPushArrayFirstLi); */
+
+        let nameOfSecondLiToDelete = ".secondResult li";
+        deleteUlList(nameOfSecondLiToDelete);
+
+        /*        for (i = 0; i < resultPushArraySecondLi.length; i++) {
+                                                if (resultPushArraySecondLi[i].nom.match(dataMask) == null) {
+                                                    secondViewResult.innerHTML += `<li><a href="/autocompletion/views/element.php/?id=${resultPushArraySecondLi[i].id_pokemon}"> ${resultPushArraySecondLi[i].nom} </a></li>`;
+                                                }
+                                            } */
+
+        createUl(
+            firstViewResult,
+            secondViewResult,
+            dataMask,
+            resultPushArrayFirstLi,
+            resultPushArraySecondLi
+        );
     }
 
     // fonction qui va créer le resultat de l'auto en deux listes
@@ -83,18 +120,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 .then((response) => response.json())
 
             .then((response) => {
-                separateResultInTwoLi(result, response);
-                /*  console.log(response); */
-
                 //afficher le résultat dans li ul search
+
+                separateResultInTwoLi(result, response);
             });
         }
         if (data === "") {
-            var lis = document.querySelectorAll(".firstResult li");
-            for (var i = 0;
-                (li = lis[i]); i++) {
-                li.parentNode.removeChild(li);
-            }
+            let nameOfLiToDelete = ".firstResult li";
+            let nameOfSecondLiToDelete = ".secondResult li";
+            deleteUlList(nameOfLiToDelete);
+            deleteUlList(nameOfSecondLiToDelete);
         }
     }
 
