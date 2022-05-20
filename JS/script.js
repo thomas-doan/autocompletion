@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     function resultInputSearch(data, fetchArrayData) {
         /*     console.log(data);
-                                                        console.log(fetchArrayData); */
+                                                                        console.log(fetchArrayData); */
 
         dataMask = new RegExp(`^${data}`, "g");
 
@@ -52,6 +52,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
                 resultPushArray.push(fetchArrayData[i]);
             }
+        }
+        var lis = document.querySelectorAll(".firstResult li");
+        for (var i = 0;
+            (li = lis[i]); i++) {
+            li.parentNode.removeChild(li);
         }
 
         for (i = 0; i < resultPushArray.length; i++) {
