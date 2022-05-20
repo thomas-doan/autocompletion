@@ -11,7 +11,7 @@ class PokemonModel
 
     public function find($search)
     {
-        $sqlVerif = "SELECT * FROM pokemon WHERE nom LIKE :nom";
+        $sqlVerif = "SELECT id_pokemon, nom FROM pokemon WHERE nom LIKE :nom";
 
         $requete = Database::connect_db()->prepare($sqlVerif);
         $requete->execute(array(
@@ -19,7 +19,7 @@ class PokemonModel
         ));
 
 
-        $select = $requete->fetchAll();
+        $select = $requete->fetchAll(PDO::FETCH_ASSOC);
 
         return $select;
     }

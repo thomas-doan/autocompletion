@@ -21,8 +21,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
     let resultSearch = document.querySelector("#site-search");
     let form = document.querySelector("#search_form");
 
+    // affichage recherche
+
+    let firstViewResult = document.querySelector(".firstResult");
+    let secondViewResult = document.querySelector(".secondResult");
+
     // fonction
     // Traitement de la recherche autocompletion
+
+    let result;
+
+    // traitement du résultat recherche
+
+    function resultInputSearch(data, fetchArrayData) {
+        console.log(data);
+        console.log(fetchArrayData);
+
+        dataMask = new RegExp(`^${data}`, "g");
+
+        /*   console.log(fetchArrayData[1].nom.match(dataMask)); */
+
+        for (i = 0; i < fetchArrayData.length; i++) {
+            if (fetchArrayData[i].nom.match(dataMask) != null) {
+                console.log("test ok");
+                console.log(fetchArrayData[i]);
+            }
+        }
+    }
+
+    // fonction qui va créer le resultat de l'auto en deux listes
+    function separateResultInTwoLi(data, fetchData) {
+        resultInputSearch(data, fetchData);
+    }
 
     function searchMethod(data) {
         if ((data.length = 1)) {
@@ -35,29 +65,21 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 .then((response) => response.json())
 
             .then((response) => {
-                console.log(response);
+                separateResultInTwoLi(result, response);
+                /*  console.log(response); */
 
                 //afficher le résultat dans li ul search
             });
         }
-        //en cours
-        /*     if (result.length > 1) {
-                                                                                                              fetch("../Controllers/routerApi.php", {
-                                                                                                                method: "POST",
-                                                                                                                body: formData,
-                                                                                                              });
-                                                                                                            } */
     }
-
-    console.log(validation);
 
     // autocompletion
 
     if (resultSearch) {
         resultSearch.addEventListener("input", (e) => {
             e.preventDefault();
-            console.log(e);
-            searchMethod(e.target.value);
+            result = e.target.value;
+            searchMethod(result);
         });
     }
 
